@@ -72,7 +72,6 @@ include "includes/config.php";
 <?php echo $config['footweb']?>
     </div>
     <div class="footer">
-      <span id="sitetime"></span>
       <br><?php echo $config['foot']?>
     </div>
   </div>
