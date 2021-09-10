@@ -16,3 +16,4 @@ V1.0
 版权所有：小白菜
 QQ：2694199949
 项目开源地址：https://github.com/2694199949/xiaobaicai_NewMimicry
+演示站：http://ys.xn--qrqp17cz1a.xn--6qq986b3xl/
