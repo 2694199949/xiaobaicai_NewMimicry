@@ -79,7 +79,8 @@ if($_COOKIE['x_Cookie'] == $用户名 and $_COOKIE['y_Cookie'] == $密码) {
 	array('QQ链接','fontqq',''),
 	array('支付宝链接','fontzfb',''),
 	array('Github链接','fontgithub',''),
-	array('微信链接','fontvx',''),
+	array('微信链接','fontvx','放微信二维码链接'),
+	array('音乐链接','music','<a href="http://www.musictool.top/" target="_blank">获取/下载音乐</a>'),
 	array('自定义区块','zbox','默认：待续'),
 	array('信息介绍','webbox',''),
 	array('底部站点','footweb',''),
@@ -112,7 +113,7 @@ if($_COOKIE['x_Cookie'] == $用户名 and $_COOKIE['y_Cookie'] == $密码) {
 		<tr>
 		    <td width="150"><?php echo $strm[$i][0];
 		?></td>
-		    <td><?php if($i<14) {
+		    <td><?php if($i<15) {
 			?><input type="text" name="<?php echo $strm[$i][1];?>"  autocomplete="off"  value="<?php echo $config[$strm[$i][1]];?>">
 				<?php
 		} else {
@@ -176,5 +177,5 @@ if($_COOKIE['x_Cookie'] == $用户名 and $_COOKIE['y_Cookie'] == $密码) {
 </div>
 </div>
 </div>
- </body
- ></html>
+ </body>
+ </html>
