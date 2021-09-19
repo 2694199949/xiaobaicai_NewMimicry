@@ -1,181 +1,84 @@
-<html>
-<head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <title>后台管理</title>
-  <link rel="stylesheet" type="text/css" href="style.css" data-for="result">
-</head>
-<body>
-  <?php
+<?php
 /*
-   版权所有：小白菜 QQ：2694199949
-   开源地址：https://github.com/2694199949/xiaobaicai_NewMimicry
-  */
-error_reporting(0);
-include './pass.php';
-function qxg($str) {
-	$str=stripslashes($str);
-	$str=str_replace('\'','\\'.'\'',$str);
-	return $str;
-}
-$namess=end(explode('/',$_SERVER['PHP_SELF']));
-if($_COOKIE['x_Cookie'] == $用户名 and $_COOKIE['y_Cookie'] == $密码) {
-} else {
-	if(!empty($_POST['adminname'])) {
-		if($_POST['password'] == $密码 & $_POST['adminname'] == $用户名) {
-			setcookie("y_Cookie", $密码);
-			setcookie("x_Cookie", $用户名);
-		} else {
-			echo"<script>alert('用户名或密码错误!!!');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
-			exit;
-		}
-	} else {
-		?>
-		    <div class="login_box">
-		    <div class="login">
-		        <div class="login-title">登录后台</div>
-		        <form action="./<?php echo $namess;?>" method="POST" autocomplete="off">
-		          <div class="login-line">
-		            <input type="text" name="adminname" class="inputtxt" autocomplete="on" placeholder="账号">
-		          </div>
-		          <div class="login-line">
-		            <input type="password" name="password" class="inputtxt" placeholder="密码">
-		          </div>
-		          <input type="submit" value="登录" class="buttontxt">
-		        </form>
-		      </div>
-		  </div>
-		  </div>
-		  <?php exit;
-	}
-}
+ 版权所有：小白菜 
+ 开源地址：https://github.com/2694199949/xiaobaicai_NewMimicry
+*/
+$mod='blank';
+include("../includes/common.php");
+$title='后台管理';
+include './head.php';
+if($islogin==1){}else exit("<script language='javascript'>window.location.href='./login.php';</script>");
 ?>
-<?php if(empty($_GET['sort'])) {
-	$_GET['sort']='index';
-}
+  <nav class="navbar navbar-fixed-top navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">导航按钮</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="./">后台管理</a>
+      </div><!-- /.navbar-header -->
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active">
+            <a href="./"><span class="glyphicon glyphicon-user"></span> 平台首页</a>
+          </li>
+		  <li><a href="./set.php"><span class="glyphicon glyphicon-cog"></span> 系统管理</a></li>
+		  <li><a href="./font.php"><span class="glyphicon glyphicon-qrcode"></span> 配二维码</a></li>
+		    <li><a href="./web.php"><span class="glyphicon glyphicon-tasks"></span> 站点管理</a></li>
+		  <li><a href="../"><span class="glyphicon glyphicon-home"></span> 返回首页</a></li>
+          <li><a href="./login.php?logout"><span class="glyphicon glyphicon-log-out"></span> 退出登陆</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav><!-- /.navbar -->
+<?php
+$numrows=$DB->count("SELECT count(*) from xbc_web");
+$yyds="2.0";
+$mysqlversion=$DB->count("select VERSION()");
 ?>
-<div class="index">
-<div class="index-h">
-</div>
-<div class="index-c">
-<div class="index-nav">
-	<ul>
-		<li><a href="../index.php" target="_blank" >网站前台</a></li>
-		<li><a href="?">基本设置</a></li>
-		<li><a href="?sort=admin">修改密码</a></li>
+  <div class="container" style="padding-top:70px;">
+    <div class="col-xs-12 col-sm-10 col-lg-8 center-block" style="float: none;">
+      <div class="panel panel-success">
+        <div class="panel-heading"><h3 class="panel-title">后台管理首页</h3></div>
+          <ul class="list-group">
+          <li class="list-group-item"><span class="glyphicon glyphicon-leaf"></span> 程序版本：V<?php echo $yyds?>&nbsp;&nbsp;<a href="https://github.com/2694199949/xiaobaicai_NewMimicry" target="_blank" class="panel panel-info">获取最新版本</a></li>
+            <li class="list-group-item"><span class="glyphicon glyphicon-stats"></span> <b>后台统计：</b>系统共有<?php echo $numrows?>个站点</li>
+            <li class="list-group-item" style="color:red;"><span class="glyphicon glyphicon-bullhorn"></span> 温馨提示：二维码、LOGO等图片可以用本地路径，也可以使用外链。音乐链接格式要用mp3。</li>
+          </ul>
+      </div>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h3 class="panel-title">服务器信息</h3>
+	</div>
+	<ul class="list-group">
+		<li class="list-group-item">
+			<b>PHP 版本：</b><?php echo phpversion() ?>
+			<?php if(ini_get('safe_mode')) { echo '线程安全'; } else { echo '非线程安全'; } ?>
+		</li>
+		<li class="list-group-item">
+			<b>MySQL 版本：</b><?php echo $mysqlversion ?>
+		</li>
+		<li class="list-group-item">
+			<b>服务器软件：</b><?php echo $_SERVER['SERVER_SOFTWARE'] ?>
+		</li>
+		
+		<li class="list-group-item">
+			<b>程序最大运行时间：</b><?php echo ini_get('max_execution_time') ?>s
+		</li>
+		<li class="list-group-item">
+			<b>POST许可：</b><?php echo ini_get('post_max_size'); ?>
+		</li>
+		<li class="list-group-item">
+			<b>文件上传许可：</b><?php echo ini_get('upload_max_filesize'); ?>
+		</li>
 	</ul>
 </div>
-<?php if($_GET['sort']=='index') {
-	include '../includes/config.php';
-	$strm=
-	array(array('网站名称','title',''),
-	array('标题','description',''),
-	array('关键字','keywords','默认：个人主页,新拟态主页,白菜新拟态主页'),
-	array('网站简介','sketch','默认：新拟态前端开发，白菜新拟态主页'),
-	array('头像地址','adminpng','外部url加http://或https://'),
-	array('管理员名称','adminname','默认：小白菜'),
-	array('首页左顶标题','hometitle','默认：New Mimicry'),
-	array('中文坐标','zuobiao','默认：中国 广东'),
-	array('英文坐标','guad','默认：CHINA GUANGDONG'),
-	array('QQ链接','fontqq',''),
-	array('支付宝链接','fontzfb',''),
-	array('Github链接','fontgithub',''),
-	array('微信链接','fontvx','放微信二维码链接'),
-	array('音乐链接','music','<a href="http://www.musictool.top/" target="_blank">获取/下载音乐</a>'),
-	array('自定义区块','zbox','默认：待续'),
-	array('信息介绍','webbox',''),
-	array('底部站点','footweb',''),
-	array('版权代码','foot',''));
-	?>	
-		 <?php 
-		 if($_GET['mod']=='save') {
-		$strss='<?php ';
-		for ($i=0;$i<count($strm);$i++) {
-			$guodus=explode('-',$strm[$i][1]);
-			if(count($guodus)==1) {
-				$strss.='$config[\''.$guodus[0].'\']=\''.qxg($_POST[$strm[$i][1]]).'\';';
-			} elseif(count($guodus)==2) {
-				$strss.='$config[\''.$guodus[0].'\'][\''.$guodus[1].'\']=\''.qxg($_POST[$strm[$i][1]]).'\';';
-			} elseif(count($guodus)==3) {
-				$strss.='$config[\''.$guodus[0].'\'][\''.$guodus[1].'\'][\''.$guodus[2].'\']=\''.qxg($_POST[$strm[$i][1]]).'\';';
-			}
-		}
-		$strss.=' ?>';
-		file_put_contents('../includes/config.php',$strss);
-		echo"<script>alert('设置保存成功!!!');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
-		?>	
-			 <?php exit;
-	}
-	?>
-	<form action="?sort=index&mod=save" method="POST">
-	<table width="100%" border="1" class="table_striped table_hover">
-	<?php for ($i=0;$i<count($strm);$i++) {
-		?>
-		<tr>
-		    <td width="150"><?php echo $strm[$i][0];
-		?></td>
-		    <td><?php if($i<15) {
-			?><input type="text" name="<?php echo $strm[$i][1];?>"  autocomplete="off"  value="<?php echo $config[$strm[$i][1]];?>">
-				<?php
-		} else {
-			?>
-				<textarea rows="6" cols="130%" name='<?php echo $strm[$i][1];?>'><?php echo $config[$strm[$i][1]];
-			?></textarea>
-				<?php
-		}
-		?>
-			</td>
-			<td width="200"><?php echo $strm[$i][2];
-		?></td>
-		  </tr>
-			<?php
-	}
-	?>
-		</table>
-	<input  type="submit" value="保存修改" class="button" >
-	</form>
-	<?php
-} elseif($_GET['sort']=='admin') {
-	?>   
-		<?php if($_GET['mod']=='save') {
-		if(!empty($_POST['name']) and !empty($_POST['pass'])) {
-			$strss='<?php $用户名=\''.$_POST['name'].'\'; $密码=\''.$_POST['pass'].'\';?>';
-			file_put_contents('./pass.php',$strss);
-		} else {
-			$zt='n';
-		}
-		?>	
-			 <br>
-			 <?php if($zt=='n') {
-			echo "<script>alert('用户名或密码不能为空!!!');location.href='".$_SERVER["HTTP_REFERER"]."';</script>";
-		} else {
-			echo "<script>alert('用户名密码修改成功!!!');location.href='?sort=index';</script>";
-		}
-		?><?php exit;
-	}
-	?>
-	<form action="?sort=admin&mod=save" method="POST">
-	<table width="100%" border="0" cellspacing="2">
-		<tr>
-		<td width="150">修改用户名</td>
-		<td><input type="text" name="name"  autocomplete="off" placeholder="输入修改后的用户名" style="width:91%"></td>
-		<td>请设置复杂一点的用户名</td>
-		</tr>
-	  <tr>
-	    <td width="150">修改密码</td>
-	    <td><input type="text" name="pass"  autocomplete="off" placeholder="输入修改后的密码" style="width:91%"></td>
-		<td>请设置复杂一点的密码</td>	
-	  </tr>
-	</table>    
-	<input  type="submit" value="保存修改" class="button">
-	</form>
-	 <?php
-}
-?>
- <div class="index-f">
-	<p>Copyright © 2021 版权所有. <a href="https://github.com/2694199949/xiaobaicai_NewMimicry">小白菜</a></p>
+    </div>
+     <div class="col-xs-12 col-sm-10 col-lg-8 center-block" style="float: none;font-size:8pt;text-align:center;">
+	Copyright © 2021 版权所有. <a href="https://github.com/2694199949/xiaobaicai_NewMimicry">小白菜</a>
 	项目开源地址：<a href="https://github.com/2694199949/xiaobaicai_NewMimicry" target="_blank">Github</a>.
-</div>
-</div>
-</div>
- </body>
- </html>
+     </div>
+  </div>
