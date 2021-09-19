@@ -1,6 +1,6 @@
 <?php
 /*
- 版权所有：小白菜 
+ 版权所有：小白菜 QQ：2694199949
  开源地址：https://github.com/2694199949/xiaobaicai_NewMimicry
 */
 $mod='blank';
@@ -54,7 +54,7 @@ if(isset($_POST['submit'])) {
 	$user=daddslashes($_POST['user']);
 	$pwd=daddslashes($_POST['pwd']);
 	$sql="update `xbc_config` set `sitename` ='{$sitename}',`keywords` ='{$keywords}',`description` ='{$description}',`toptitle` ='{$toptitle}',`logo` ='{$logo}',`adminname` ='{$adminname}',`zuobiao` ='{$zuobiao}',`zuobiaoen` ='{$zuobiaoen}',`box_left` ='{$box_left}',`box_right1` ='{$box_right1}',`box_right2` ='{$box_right2}',`music` ='{$music}',`footer` ='{$footer}' where `id`='{$siteid}'";
-	if(!empty($pwd))$DB->query("update `xbc_config` set `pwd` ='{$pwd}'`, `user` ='{$user}', where `id`='{$siteid}'");
+	if(!empty($pwd))$DB->query("update `xbc_config` set `pwd` ='{$pwd}',`user` ='{$user}' where `id`='{$siteid}'");
 	if($DB->query($sql))showmsg('修改成功！',1);
 	else showmsg('修改失败！<br/>'.$DB->error(),4);
 }else{
