@@ -1,6 +1,6 @@
 <?php 
 /*
- 版权所有：小白菜 
+ 版权所有：小白菜 QQ：2694199949
  开源地址：https://github.com/2694199949/xiaobaicai_NewMimicry
 */
 include("../includes/common.php");
@@ -26,7 +26,6 @@ if($islogin==1){}else exit("<script language='javascript'>window.location.href='
           </li>
 
 		  <li><a href="./set.php"><span class="glyphicon glyphicon-cog"></span> 系统管理</a></li>
-		  <li><a href="./font.php"><span class="glyphicon glyphicon-qrcode"></span> 配二维码</a></li>
 		  <li class="active"><a href="./web.php"><span class="glyphicon glyphicon-tasks"></span> 站点管理</a></li>
 		  <li><a href="../"><span class="glyphicon glyphicon-home"></span> 返回首页</a></li>
           <li><a href="./login.php?logout"><span class="glyphicon glyphicon-log-out"></span> 退出登陆</a></li>

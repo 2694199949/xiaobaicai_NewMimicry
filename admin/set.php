@@ -26,7 +26,6 @@ if($islogin==1){}else exit("<script language='javascript'>window.location.href='
             <a href="./"><span class="glyphicon glyphicon-user"></span> 平台首页</a>
           </li>
 		  <li class="active"><a href="./set.php"><span class="glyphicon glyphicon-cog"></span> 系统管理</a></li>
-		  <li><a href="./font.php"><span class="glyphicon glyphicon-qrcode"></span> 配二维码</a></li>
 		  <li><a href="./web.php"><span class="glyphicon glyphicon-tasks"></span> 站点管理</a></li>
 		  <li><a href="../"><span class="glyphicon glyphicon-home"></span> 返回首页</a></li>
           <li><a href="./login.php?logout"><span class="glyphicon glyphicon-log-out"></span> 退出登陆</a></li>
@@ -53,7 +52,15 @@ if(isset($_POST['submit'])) {
 	$footer=daddslashes($_POST['footer']);
 	$user=daddslashes($_POST['user']);
 	$pwd=daddslashes($_POST['pwd']);
-	$sql="update `xbc_config` set `sitename` ='{$sitename}',`keywords` ='{$keywords}',`description` ='{$description}',`toptitle` ='{$toptitle}',`logo` ='{$logo}',`adminname` ='{$adminname}',`zuobiao` ='{$zuobiao}',`zuobiaoen` ='{$zuobiaoen}',`box_left` ='{$box_left}',`box_right1` ='{$box_right1}',`box_right2` ='{$box_right2}',`music` ='{$music}',`footer` ='{$footer}' where `id`='{$siteid}'";
+	$qqimg=daddslashes($_POST['qqimg']);
+	$vximg=daddslashes($_POST['vximg']);
+	$zfbimg=daddslashes($_POST['zfbimg']);
+	$githubimg=daddslashes($_POST['githubimg']);
+	$qqtext=daddslashes($_POST['qqtext']);
+	$vxtext=daddslashes($_POST['vxtext']);
+	$zfbtext=daddslashes($_POST['zfbtext']);
+	$githubtext=daddslashes($_POST['githubtext']);
+	$sql="update `xbc_config` set `sitename` ='{$sitename}',`keywords` ='{$keywords}',`description` ='{$description}',`toptitle` ='{$toptitle}',`logo` ='{$logo}',`adminname` ='{$adminname}',`zuobiao` ='{$zuobiao}',`zuobiaoen` ='{$zuobiaoen}',`box_left` ='{$box_left}',`box_right1` ='{$box_right1}',`box_right2` ='{$box_right2}',`music` ='{$music}',`footer` ='{$footer}', `qqimg` ='{$qqimg}',`vximg` ='{$vximg}',`zfbimg` ='{$zfbimg}',`githubimg` ='{$githubimg}',`qqtext` ='{$qqtext}',`vxtext` ='{$vxtext}',`zfbtext` ='{$zfbtext}',`githubtext` ='{$githubtext}' where `id`='{$siteid}'";
 	if(!empty($pwd))$DB->query("update `xbc_config` set `pwd` ='{$pwd}',`user` ='{$user}' where `id`='{$siteid}'");
 	if($DB->query($sql))showmsg('修改成功！',1);
 	else showmsg('修改失败！<br/>'.$DB->error(),4);
@@ -115,6 +122,30 @@ if(isset($_POST['submit'])) {
 	  <label class="col-sm-2 control-label">底部版权</label>
 	  <div class="col-sm-10"><textarea class="form-control" name="footer" rows="5"><?php echo $conf['footer']; ?></textarea></div>
 	</div><br/>
+		<div class="form-group">
+	  <label class="col-sm-2 control-label">QQ二维码图片</label>
+	  <div class="col-sm-10"><input type="text" name="qqimg" value="<?php echo $conf['qqimg']; ?>" class="form-control"/></div>
+	  <label class="col-sm-2 control-label">QQ顶部提示文字</label>
+	  <div class="col-sm-10"><input type="text" name="qqtext" value="<?php echo $conf['qqtext']; ?>" class="form-control"  /></div>
+	</div><br/>
+	<div class="form-group">
+	  <label class="col-sm-2 control-label">微信二维码</label>
+	  <div class="col-sm-10"><input type="text" name="vximg" value="<?php echo $conf['vximg']; ?>" class="form-control"  /></div>
+	  <label class="col-sm-2 control-label">微信顶部提示文字</label>
+	  <div class="col-sm-10"><input type="text" name="vxtext" value="<?php echo $conf['vxtext']; ?>" class="form-control"  /></div>
+	</div><br/>
+	<div class="form-group">
+	  <label class="col-sm-2 control-label">支付宝二维码</label>
+	  <div class="col-sm-10"><input type="text" name="zfbimg" value="<?php echo $conf['zfbimg']; ?>" class="form-control"/></div>
+	  <label class="col-sm-2 control-label">支付宝顶部提示文字</label>
+	  <div class="col-sm-10"><input type="text" name="zfbtext" value="<?php echo $conf['zfbtext']; ?>" class="form-control"  /></div>
+	</div><br/>
+	<div class="form-group">
+	  <label class="col-sm-2 control-label">Github二维码</label>
+	  <div class="col-sm-10"><input type="text" name="githubimg" value="<?php echo $conf['githubimg']; ?>" class="form-control"/></div>
+	  <label class="col-sm-2 control-label">Github顶部提示文字</label>
+	  <div class="col-sm-10"><input type="text" name="githubtext" value="<?php echo $conf['githubtext']; ?>" class="form-control"  /></div>
+	</div><br/>
 	<div class="form-group">
 	  <label class="col-sm-2 control-label">用户名重置</label>
 	  <div class="col-sm-10"><input type="text" name="user" value="" class="form-control" placeholder="不修改请留空"/></div>
@@ -130,6 +161,7 @@ if(isset($_POST['submit'])) {
   </form>
 </div>
 </div>
+
 <?php
 }?>
     </div>
